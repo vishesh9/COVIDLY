@@ -1,0 +1,16 @@
+.carouselblur {
+  /* background: rgba(255, 255, 255, 0.2); */
+  /* filter: blur(8px); */
+  height: 60vh;
+  width: 100%;
+}
+.colorMagic {
+  mix-blend-mode: color-dodge;
+}
+.bgColor {
+  background-color: #343a40;
+  border-radius: 13px;
+  padding-left: 20px;
+  padding-right: 20px;
+  opacity: 0.8;
+}

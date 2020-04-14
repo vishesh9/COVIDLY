@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import AboutComponent from "./Components/About/About";
+import NavBar from "./Components/NavBar/NavBar";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import FooterComponent from "./Components/Footer/Footer";
+import PrecautionsComponent from "./Components/Precautions/Precautions";
 
-function App() {
+const history = require("history").createBrowserHistory;
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <React.Fragment>
+          <NavBar />
+          <Route path="/" exact>
+            <Dashboard />
+          </Route>
+          <Route path="/about">
+            <AboutComponent />
+          </Route>
+          <Route path="/precautions">
+            <PrecautionsComponent />
+          </Route>
+          <FooterComponent />
+        </React.Fragment>
+      </Switch>
+    </Router>
   );
 }
 

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Covidly",
+  "name": "Real time COVID-19 monitoring app",
   "icons": [
     {
       "src": "favicon.ico",
