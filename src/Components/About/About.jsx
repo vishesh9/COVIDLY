@@ -8,6 +8,9 @@ const AboutComponent = (props) => {
           <h1>About me</h1>
         </div>
         <div className="row">
+          <div className="col-md-12 text-center">
+            <img src={require("../../assets/img/Developer.gif")} />
+          </div>
           <div className="col-md-12 ">
             <p className="text-center">
               Talking about myself, I am a software engineer by profession, A

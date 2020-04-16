@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const TopStateChart = (props) => {
   const { TotalCases } = props.TotalCasesObj;
@@ -150,26 +151,41 @@ const TopStateChart = (props) => {
 
       <div className="row">
         <div className="col-md-6">
-          <Doughnut
-            data={{
-              datasets: stateDataPie.datasets,
-              labels: stateDataPie.labels,
-            }}
-            options={options}
-          />
+          {stateDataPie.datasets[0].data == null ||
+          stateDataPie.datasets[0].data.length === 0 ? (
+            <SkeletonTheme color="#838c90" highlightColor="#444">
+              <p className="text-center">
+                <Skeleton circle={true} height={265} width={265} />
+              </p>
+            </SkeletonTheme>
+          ) : (
+            <Doughnut
+              data={{
+                datasets: stateDataPie.datasets,
+                labels: stateDataPie.labels,
+              }}
+              options={options}
+            />
+          )}
         </div>
-        {/* <div className="header">
-          <h6>Top 10 countries with most number of cases.</h6>
-          <hr />
-        </div> */}
+
         <div className="col-md-6">
-          <Doughnut
-            data={{
-              datasets: worldDataPie.datasets,
-              labels: worldDataPie.labels,
-            }}
-            options={options}
-          />
+          {worldDataPie.datasets[0].data == null ||
+          worldDataPie.datasets[0].data.length === 0 ? (
+            <SkeletonTheme color="#838c90" highlightColor="#444">
+              <p className="text-center">
+                <Skeleton circle={true} height={265} width={265} />
+              </p>
+            </SkeletonTheme>
+          ) : (
+            <Doughnut
+              data={{
+                datasets: worldDataPie.datasets,
+                labels: worldDataPie.labels,
+              }}
+              options={options}
+            />
+          )}
         </div>
       </div>
     </React.Fragment>

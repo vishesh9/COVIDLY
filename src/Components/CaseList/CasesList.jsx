@@ -10,7 +10,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
 
 import "./CasesList";
 import Loader from "../Loader/Loader";

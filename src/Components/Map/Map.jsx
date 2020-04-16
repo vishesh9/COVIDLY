@@ -3,12 +3,24 @@ import india from "@svg-maps/india";
 import { SVGMap } from "react-svg-map";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import styled from "styled-components";
 
 import "react-svg-map/lib/index.css";
 import "./Map.css";
 import "react-svg-map/lib/index.css";
 
 function Maps(props) {
+  // const SVGMapStyled = styled(SVGMap)`
+  //   path {
+  //     fill: #343a40 !important;
+  //   }
+
+  //   path:hover,
+  //   polygon:hover {
+  //     fill: #ff7c65 !important;
+  //   }
+  // `;
+
   const { TotalCases } = props.TotalCasesObj;
   const [CasesCount, setCasesCount] = useState(0);
   const [CityName, setCityName] = useState("");
@@ -43,48 +55,56 @@ function Maps(props) {
     setDeceasedCount(0);
   };
 
+  const getClassForBadge = () => {
+    if (CasesCount < 50) return "badge p-2 m-1 badge-success";
+    else if (CasesCount > 50 && CasesCount < 100)
+      return "badge p-2 m-1 badge-warning";
+    else return "badge p-2 m-1 badge-danger";
+  };
+  let Classes = getClassForBadge();
+
   return (
     <React.Fragment>
       <div className="header">
         <h1>India</h1>
         <h6>Hover over a state/UT for more details </h6>
+        <hr />
       </div>
       <div className="p-2">
-        <OverlayTrigger
-          key="top"
-          placement="top"
-          overlay={
-            <Tooltip>
-              {CasesCount === 0 &&
-              ActiveCount === 0 &&
-              RecoveredCount === 0 &&
-              DeceasedCount === 0 ? (
-                ""
-              ) : (
-                <strong>
-                  <span>
-                    {CityName} : {CasesCount} <br />
-                    Active : {ActiveCount} <br />
-                    Recovered : {RecoveredCount} <br />
-                    Deceased : {DeceasedCount}
-                  </span>
-                </strong>
-              )}
-            </Tooltip>
-          }
-        >
-          <div>
-            <SVGMap
-              map={india}
-              onLocationMouseOver={(e) => {
-                onMouseOverMap(e);
-              }}
-              onLocationMouseOut={() => {
-                onMouseOutMap();
-              }}
-            />
-          </div>
-        </OverlayTrigger>
+        <div>
+          {CasesCount === 0 &&
+          ActiveCount === 0 &&
+          RecoveredCount === 0 &&
+          DeceasedCount === 0 ? (
+            ""
+          ) : (
+            <div
+              className="row"
+              style={{ position: "fixed", right: "0", bottom: "54%" }}
+            >
+              <div className="col-md-12 text-right">
+                <span className={Classes}>State/UT : {CityName}</span>
+                <br />
+                <span className={Classes}>Total Cases : {CasesCount}</span>
+                <br />
+                <span className={Classes}> Active : {ActiveCount} </span>
+                <br />
+                <span className={Classes}>Recovered : {RecoveredCount} </span>
+                <br />
+                <span className={Classes}>Deceased : {DeceasedCount}</span>
+              </div>
+            </div>
+          )}
+          <SVGMap
+            map={india}
+            onLocationMouseOver={(e) => {
+              onMouseOverMap(e);
+            }}
+            onLocationMouseOut={() => {
+              onMouseOutMap();
+            }}
+          />
+        </div>
       </div>
     </React.Fragment>
   );
