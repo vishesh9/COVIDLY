@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card } from "react-bootstrap";
-import Loader from "../Loader/Loader";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,7 +10,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+
 import "./CasesList";
+import Loader from "../Loader/Loader";
 
 const columns = [
   { id: "sno", label: "S No.", minWidth: 68 },
@@ -149,8 +151,9 @@ function CasesList(props) {
             API's
           </a>
         </h6>
+        <hr />
       </div>
-      {TotalCases.length === 0 ? (
+      {TotalCases?.length === 0 ? (
         // <Loader />
         <SkeletonTheme color="#838c90" highlightColor="#444">
           <p>

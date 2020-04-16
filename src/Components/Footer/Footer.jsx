@@ -8,7 +8,7 @@ const FooterComponent = (props) => {
         <div className="footer-copyright">
           <div className="container-fluid">
             <p className="copyright text-center">
-              © 2020 COVIDLY. All rights reserved. Made with
+              © 2020 COVIDLY. All rights reserved. Made with{" "}
               <span className="heart" style={{ color: "red" }}>
                 ❤
               </span>{" "}

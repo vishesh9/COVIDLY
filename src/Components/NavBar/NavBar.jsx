@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 class NavBar extends Component {
   state = {};
@@ -76,20 +77,27 @@ class NavBar extends Component {
                 </div>
               </li> */}
             </ul>
-            <form className="form-inline my-2 my-lg-0">
-              <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                className="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
-              </button>
-            </form>
+            {/* <form className="form-inline my-2 my-lg-0"> */}
+            {/* <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            /> */}
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+              onClick={() => {
+                window.open(
+                  "https://github.com/vishesh9/COVIDLY.git",
+                  "_blank"
+                );
+              }}
+            >
+              <GitHubIcon style={{ paddingRight: "2px" }} />
+              <span style={{ paddingLeft: "3px" }}>GitHub</span>
+            </button>
+            {/* </form> */}
           </div>
         </nav>
       </React.Fragment>
