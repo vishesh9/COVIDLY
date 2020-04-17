@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import GitHubIcon from "@material-ui/icons/GitHub";
 
 class NavBar extends Component {
   state = {};
@@ -51,31 +50,6 @@ class NavBar extends Component {
               >
                 <li className="nav-item">About</li>
               </Link>
-              {/* <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </div>
-              </li> */}
             </ul>
             {/* <form className="form-inline my-2 my-lg-0"> */}
             {/* <input
@@ -94,7 +68,10 @@ class NavBar extends Component {
                 );
               }}
             >
-              <GitHubIcon style={{ paddingRight: "2px" }} />
+              <i
+                className="fa fa-github"
+                style={{ fontSize: "1.2rem", paddingRight: "2px" }}
+              ></i>
               <span style={{ paddingLeft: "3px" }}>GitHub</span>
             </button>
             {/* </form> */}

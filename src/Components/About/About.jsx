@@ -9,7 +9,10 @@ const AboutComponent = (props) => {
         </div>
         <div className="row">
           <div className="col-md-12 text-center">
-            <img src={require("../../assets/img/Developer.gif")} />
+            <img
+              src={require("../../assets/img/Developer.gif")}
+              className="img-fluid"
+            />
           </div>
           <div className="col-md-12 ">
             <p className="text-center">

@@ -5,10 +5,6 @@ import { Link } from "react-router-dom";
 const NotFound = (props) => {
   return (
     <React.Fragment>
-      {/* <img
-              src={require("../../assets/img/404.jpg")}
-              style={{ width: "100%" }}
-            /> */}
       <section class="page_404 fadeIn">
         <div class="container">
           <div class="row">
@@ -21,7 +17,7 @@ const NotFound = (props) => {
                 <div class="contant_box_404">
                   <h3 class="h2">Looks like you're lost</h3>
 
-                  <p>the page you are looking for not avaible!</p>
+                  <p>The page you are looking for is not available!</p>
 
                   <Link to="/">
                     <button className="btn btn-outline-success my-2 my-sm-0">

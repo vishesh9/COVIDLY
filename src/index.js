@@ -9,6 +9,7 @@ import "bootstrap/js/dist/dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/jquery/dist/jquery.min.js";
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
+import "font-awesome/css/font-awesome.min.css";
 
 // Create a new theme using Nunito Sans
 const theme = createMuiTheme({

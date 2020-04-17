@@ -12,7 +12,7 @@ const TopStateChart = (props) => {
   const options = {
     responsive: true,
     legend: {
-      display: true,
+      display: false,
       position: "left",
     },
   };
@@ -140,52 +140,53 @@ const TopStateChart = (props) => {
             <h6>Top 10 states/UT's in India with most number of cases.</h6>
             <hr />
           </div>
+          <div className="row">
+            <div className="col-md-12">
+              {stateDataPie.datasets[0].data == null ||
+              stateDataPie.datasets[0].data.length === 0 ? (
+                <SkeletonTheme color="#838c90" highlightColor="#444">
+                  <p className="text-center">
+                    <Skeleton circle={true} height={265} width={265} />
+                  </p>
+                </SkeletonTheme>
+              ) : (
+                <Doughnut
+                  className="img-fluid"
+                  data={{
+                    datasets: stateDataPie.datasets,
+                    labels: stateDataPie.labels,
+                  }}
+                  options={options}
+                />
+              )}
+            </div>
+          </div>
         </div>
         <div className="col-md-6">
           <div className="header">
             <h6>Top 10 countries with most number of cases.</h6>
             <hr />
           </div>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-md-6">
-          {stateDataPie.datasets[0].data == null ||
-          stateDataPie.datasets[0].data.length === 0 ? (
-            <SkeletonTheme color="#838c90" highlightColor="#444">
-              <p className="text-center">
-                <Skeleton circle={true} height={265} width={265} />
-              </p>
-            </SkeletonTheme>
-          ) : (
-            <Doughnut
-              data={{
-                datasets: stateDataPie.datasets,
-                labels: stateDataPie.labels,
-              }}
-              options={options}
-            />
-          )}
-        </div>
-
-        <div className="col-md-6">
-          {worldDataPie.datasets[0].data == null ||
-          worldDataPie.datasets[0].data.length === 0 ? (
-            <SkeletonTheme color="#838c90" highlightColor="#444">
-              <p className="text-center">
-                <Skeleton circle={true} height={265} width={265} />
-              </p>
-            </SkeletonTheme>
-          ) : (
-            <Doughnut
-              data={{
-                datasets: worldDataPie.datasets,
-                labels: worldDataPie.labels,
-              }}
-              options={options}
-            />
-          )}
+          <div className="row">
+            <div className="col-md-12">
+              {worldDataPie.datasets[0].data == null ||
+              worldDataPie.datasets[0].data.length === 0 ? (
+                <SkeletonTheme color="#838c90" highlightColor="#444">
+                  <p className="text-center">
+                    <Skeleton circle={true} height={265} width={265} />
+                  </p>
+                </SkeletonTheme>
+              ) : (
+                <Doughnut
+                  data={{
+                    datasets: worldDataPie.datasets,
+                    labels: worldDataPie.labels,
+                  }}
+                  options={options}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>

@@ -12,18 +12,11 @@ const DashboardComponent = (props) => {
     IsLoading: true,
   });
 
-  const [stateWiseData, setStateWiseData] = useState([]);
   const [WorldCases, setWorldCases] = useState([]);
 
   useEffect(() => {
-    // fetch("https://api.covid19india.org/data.json")
-    //   .then((res) => res.json())
-    //   .then((tc) => {
-    //     setTotalCasesObj({ TotalCases: tc.statewise, IsLoading: false });
-    //   });
     async function getData() {
       let firstURL = "https://api.covid19india.org/data.json";
-      // let secondURL = "https://api.covid19india.org/state_district_wise.json";
       let secondURL = "https://corona.lmao.ninja/v2/countries";
 
       const requestOne = axios.get(firstURL);
@@ -35,13 +28,10 @@ const DashboardComponent = (props) => {
           axios.spread((...responses) => {
             const responseOne = responses[0];
             const responseTwo = responses[1];
-            // console.log(responseOne);
-            // console.log(responseTwo);
             setTotalCasesObj({
               TotalCases: responseOne.data.statewise,
               IsLoading: false,
             });
-            // setStateWiseData(responseTwo.data);
             setWorldCases(responseTwo.data);
           })
         )
@@ -55,10 +45,6 @@ const DashboardComponent = (props) => {
   return (
     <React.Fragment>
       <main className="container fadeIn">
-        <div className="header text-center">
-          <h1>Top Headlines</h1>
-          <hr />
-        </div>
         <div className="row">
           <div className="col-md-12" style={{ minHeight: "270px" }}>
             <CarouselComponent />

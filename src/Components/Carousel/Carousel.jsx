@@ -13,6 +13,7 @@ function CarouselComponent(props) {
     articles: [],
   });
   let noOfRecords = 100;
+  const [fetching, setFetching] = useState(true);
 
   function endsWithAny(suffixes, string) {
     return suffixes.some(function (suffix) {
@@ -20,7 +21,7 @@ function CarouselComponent(props) {
     });
   }
 
-  useEffect(() => {
+  function fetchNews() {
     let dateObj = new Date();
     let fromDate =
       dateObj.getFullYear() +
@@ -28,11 +29,9 @@ function CarouselComponent(props) {
       (dateObj.getMonth() + 1) +
       "-" +
       dateObj.getDate();
-    const url = `http://newsapi.org/v2/everything?q=Covid19&language=en&pageSize=${noOfRecords}&from=${fromDate}&sortBy=popularity&apiKey=092667353de94deb920b134f239a35ac`;
+    const url = `https://newsapi.org/v2/everything?q=Covid19&language=en&pageSize=${noOfRecords}&from=${fromDate}&sortBy=popularity&apiKey=092667353de94deb920b134f239a35ac`;
     //"http://newsapi.org/v2/top-headlines?country=in&apiKey=092667353de94deb920b134f239a35ac";
-
     var req = new Request(url);
-
     fetch(req)
       .then((response) => {
         return response.json();
@@ -41,22 +40,44 @@ function CarouselComponent(props) {
         res.status === "error"
           ? console.log("API error :", res.message)
           : setState({ articles: res.articles.reverse() });
+        setFetching(false);
       })
       .catch((err) => {
         console.log("Something went wrong", err);
       });
-  }, []);
+  }
+
+  useEffect(() => {
+    fetchNews();
+  }, [fetching]);
 
   let imgUrl = "";
   let flag = false;
   let { articles } = state;
   let randomNumber = Math.floor(Math.random() * 80);
-  // articles = articles.slice(noOfRecords - 6, noOfRecords - 1);
   articles = articles.slice(randomNumber, randomNumber + 5);
 
   return (
     <React.Fragment>
-      {articles.length === 0 ? (
+      <div className="header text-center">
+        <h1>Top Headlines</h1>
+        {fetching === true ? (
+          <Loader />
+        ) : (
+          <span
+            className="badge badge-success badge-btn"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setFetching(true);
+              fetchNews();
+            }}
+          >
+            Fetch new stories
+          </span>
+        )}
+        <hr />
+      </div>
+      {articles.length === 0 || fetching ? (
         // <Loader />
         <SkeletonTheme color="#838c90" highlightColor="#444">
           <p>
@@ -72,7 +93,7 @@ function CarouselComponent(props) {
             );
             flag === true
               ? (imgUrl = article.urlToImage)
-              : (imgUrl = require("../../assets/img/notFound.jpg"));
+              : (imgUrl = require("../../assets/img/notFoundBG.jpg"));
 
             return (
               <Carousel.Item key={index}>

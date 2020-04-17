@@ -6,16 +6,13 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import styled from "styled-components";
 
 import "react-svg-map/lib/index.css";
-import "./Map.css";
+import styles from "./Map.css";
 import "react-svg-map/lib/index.css";
 
 function Maps(props) {
-  // const SVGMapStyled = styled(SVGMap)`
-  //   path {
-  //     fill: #343a40 !important;
-  //   }
-
-  //   path:hover,
+  // const SVGMapStyled = styled(path)`
+  //   fill: #343a40 !important;
+  //   &:hover,
   //   polygon:hover {
   //     fill: #ff7c65 !important;
   //   }
@@ -71,7 +68,7 @@ function Maps(props) {
         <hr />
       </div>
       <div className="p-2">
-        <div>
+        <div style={{ position: "relative" }}>
           {CasesCount === 0 &&
           ActiveCount === 0 &&
           RecoveredCount === 0 &&
@@ -80,17 +77,19 @@ function Maps(props) {
           ) : (
             <div
               className="row"
-              style={{ position: "fixed", right: "0", bottom: "54%" }}
+              style={{
+                position: "absolute",
+                right: "0",
+                top: "-12px",
+              }}
             >
               <div className="col-md-12 text-right">
                 <span className={Classes}>State/UT : {CityName}</span>
                 <br />
                 <span className={Classes}>Total Cases : {CasesCount}</span>
-                <br />
                 <span className={Classes}> Active : {ActiveCount} </span>
                 <br />
                 <span className={Classes}>Recovered : {RecoveredCount} </span>
-                <br />
                 <span className={Classes}>Deceased : {DeceasedCount}</span>
               </div>
             </div>

@@ -1,18 +1,14 @@
-body {
-  background: #34495e;
-}
-
 .loader {
-  position: fixed;
+  position: absolute;
+  left: 49%;
   top: 50%;
-  left: 48%;
   z-index: 1;
 }
 
 .individualLoader {
-  position: absolute;
+  /* position: absolute;
   left: 49%;
-  top: 50%;
+  top: 50%; */
   z-index: 1;
 }
 
@@ -23,7 +19,8 @@ body {
   transform-origin: center center;
   margin: 0 3px;
   width: 1px;
-  height: 25px;
+  height: 10px;
+  /* height: 25px; */
 }
 
 .line:nth-child(1) {
