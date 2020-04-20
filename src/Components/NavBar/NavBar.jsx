@@ -1,9 +1,27 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import { Link } from "react-router-dom";
 
 class NavBar extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+
+    this.state = {
+      collapsed: true,
+    };
+  }
+
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
   render() {
+    const collapsed = this.state.collapsed;
+    const classOne = collapsed
+      ? "collapse navbar-collapse"
+      : "collapse navbar-collapse show";
+    const classTwo = collapsed ? "navbar-toggler collapsed" : "navbar-toggler";
     return (
       <React.Fragment>
         <nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -11,7 +29,7 @@ class NavBar extends Component {
             <img className="iconClass rotate" src="/covidIcon.png" />
           </Link>
           <button
-            className="navbar-toggler"
+            // className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -19,14 +37,17 @@ class NavBar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
             data-toggle="collapse"
+            onClick={this.toggleNavbar}
+            className={`${classTwo}`}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className={`${classOne}`} id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <Link
                 to="/"
+                onClick={this.toggleNavbar}
                 className="nav-link fadeIn"
                 style={{ animationDelay: "0.5s", opacity: "0" }}
               >
@@ -37,6 +58,7 @@ class NavBar extends Component {
 
               <Link
                 to="/precautions"
+                onClick={this.toggleNavbar}
                 className="nav-link fadeIn"
                 style={{ animationDelay: "0.75s", opacity: "0" }}
               >
@@ -45,6 +67,7 @@ class NavBar extends Component {
 
               <Link
                 to="/about"
+                onClick={this.toggleNavbar}
                 className="nav-link fadeIn"
                 style={{ animationDelay: "1s", opacity: "0" }}
               >

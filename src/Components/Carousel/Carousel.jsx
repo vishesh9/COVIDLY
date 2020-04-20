@@ -23,13 +23,21 @@ function CarouselComponent(props) {
 
   function fetchNews() {
     let dateObj = new Date();
-    let fromDate =
+    let toDate =
       dateObj.getFullYear() +
       "-" +
       (dateObj.getMonth() + 1) +
       "-" +
       dateObj.getDate();
-    const url = `https://newsapi.org/v2/everything?q=Covid19&language=en&pageSize=${noOfRecords}&from=${fromDate}&sortBy=popularity&apiKey=092667353de94deb920b134f239a35ac`;
+
+    let fromDate =
+      dateObj.getFullYear() +
+      "-" +
+      (dateObj.getMonth() + 1) +
+      "-" +
+      dateObj.getDate() -
+      1;
+    const url = `https://newsapi.org/v2/everything?q=Covid19&language=en&pageSize=${noOfRecords}&from=${fromDate}&to=${toDate}sortBy=popularity&apiKey=092667353de94deb920b134f239a35ac`;
     //"http://newsapi.org/v2/top-headlines?country=in&apiKey=092667353de94deb920b134f239a35ac";
     var req = new Request(url);
     fetch(req)

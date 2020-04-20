@@ -114,7 +114,7 @@ const TopStateChart = (props) => {
         var y = +b.active;
         return y - x;
       });
-      const TopFive = sortedCases.slice(1, 11);
+      const TopFive = sortedCases.slice(0, 10);
       // Prepare data for chartJS
       const Data = TopFive.map((ele) => ele.active); // for ex: [ 22, 44, 35, ...]
       const Country = TopFive.map((ele) => ele.country); // for ex: [ 22, 44, 35, ...]

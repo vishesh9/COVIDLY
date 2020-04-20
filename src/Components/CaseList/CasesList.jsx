@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card } from "react-bootstrap";
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,12 +12,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
 
 import "./CasesList";
 import Loader from "../Loader/Loader";
 
 const columns = [
-  { id: "sno", label: "S No.", minWidth: 68 },
+  // { id: "sno", label: "S No.", minWidth: 68 },
   { id: "state", label: "State", minWidth: 150 },
   {
     id: "confirmed",
@@ -55,9 +59,30 @@ const useStyles = makeStyles({
 });
 
 function CasesList(props) {
+  const { TotalCases, IsLoading } = props.TotalCasesObj;
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([]);
+  const [allStates, setAllStates] = React.useState([]);
+
+  useEffect(() => {
+    let data = [];
+    TotalCases.map((Case, index) => {
+      return data.push({
+        // sno: index + 1,
+        state: Case.state,
+        confirmed: Case.confirmed,
+        active: Case.active,
+        recovered: Case.recovered,
+        deceased: Case.deaths,
+      });
+    });
+    setRows(data);
+    const TC = TotalCases;
+    setAllStates(TC.sort(compare));
+  }, [TotalCases]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -68,21 +93,36 @@ function CasesList(props) {
     setPage(0);
   };
 
-  const renderTable = (TotalCases, IsLoading) => {
-    const rows = [];
-    TotalCases.map((Case, index) => {
-      return rows.push({
-        sno: index + 1,
-        state: Case.state,
-        confirmed: Case.active,
-        active: Case.confirmed,
-        recovered: Case.recovered,
-        deceased: Case.deaths,
-      });
+  const handleSearchChange = (event) => {
+    const searchString = event.target.textContent.toUpperCase();
+    let searchResults = TotalCases.filter((ele) => {
+      return ele.state.toUpperCase().indexOf(searchString) !== -1;
     });
+    setRows(searchResults);
+  };
+
+  function compare(a, b) {
+    if (a.state < b.state) {
+      return -1;
+    }
+    if (a.state > b.state) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const renderTable = (TotalCases, IsLoading) => {
     return (
       <div className="p-2">
         <Paper className={classes.root}>
+          <Autocomplete
+            id="SearchBox"
+            options={allStates}
+            getOptionLabel={(option) => option.state}
+            style={{ float: "right", margin: "10px", width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Search" />}
+            onChange={handleSearchChange}
+          />
           <TableContainer>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -139,7 +179,6 @@ function CasesList(props) {
     );
   };
 
-  const { TotalCases, IsLoading } = props.TotalCasesObj;
   return (
     <React.Fragment>
       <div className="header">
