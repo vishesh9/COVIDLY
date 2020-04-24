@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,7 +13,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 
 import "./CasesList";
-import Loader from "../Loader/Loader";
 
 const columns = [
   // { id: "sno", label: "S No.", minWidth: 68 },
@@ -43,7 +39,7 @@ const columns = [
     format: (value) => value.toFixed(2),
   },
   {
-    id: "deceased",
+    id: "deaths",
     label: "Deceased",
     minWidth: 100,
     align: "right",
@@ -64,7 +60,7 @@ function CasesList(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState([]);
+  const [rows, setDataRows] = React.useState([]);
   const [allStates, setAllStates] = React.useState([]);
 
   useEffect(() => {
@@ -76,11 +72,11 @@ function CasesList(props) {
         confirmed: Case.confirmed,
         active: Case.active,
         recovered: Case.recovered,
-        deceased: Case.deaths,
+        deaths: Case.deaths,
       });
     });
-    setRows(data);
-    const TC = TotalCases;
+    setDataRows(data);
+    const TC = [...TotalCases];
     setAllStates(TC.sort(compare));
   }, [TotalCases]);
 
@@ -98,7 +94,7 @@ function CasesList(props) {
     let searchResults = TotalCases.filter((ele) => {
       return ele.state.toUpperCase().indexOf(searchString) !== -1;
     });
-    setRows(searchResults);
+    setDataRows(searchResults);
   };
 
   function compare(a, b) {
@@ -147,7 +143,7 @@ function CasesList(props) {
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.code}
+                        key={row.statecode}
                       >
                         {columns.map((column) => {
                           const value = row[column.id];

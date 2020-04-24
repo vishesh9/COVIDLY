@@ -73,6 +73,14 @@ class NavBar extends Component {
               >
                 <li className="nav-item">About</li>
               </Link>
+              <Link
+                to="/feedback"
+                onClick={this.toggleNavbar}
+                className="nav-link fadeIn"
+                style={{ animationDelay: "1.25s", opacity: "0" }}
+              >
+                <li className="nav-item">Feedback</li>
+              </Link>
             </ul>
             {/* <form className="form-inline my-2 my-lg-0"> */}
             {/* <input

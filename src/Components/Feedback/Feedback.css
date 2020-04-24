@@ -1,0 +1,5 @@
+.required::before {
+  content: "* ";
+  display: inline;
+  color: red;
+}

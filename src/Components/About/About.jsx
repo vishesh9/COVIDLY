@@ -6,6 +6,7 @@ const AboutComponent = (props) => {
       <main className="container fadeIn">
         <div className="header text-center">
           <h1>About me</h1>
+          <hr />
         </div>
         <div className="row">
           <div className="col-md-12 text-center">

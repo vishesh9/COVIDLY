@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import FooterComponent from "./Components/Footer/Footer";
 import PrecautionsComponent from "./Components/Precautions/Precautions";
 import NotFound from "./Components/Errors/NotFound";
+import Feedback from "./Components/Feedback/Feedback";
 
 const history = require("history").createBrowserHistory;
 function App(props) {
@@ -26,6 +27,9 @@ function App(props) {
           </Route>
           <Route path="/precautions" exact>
             <PrecautionsComponent />
+          </Route>
+          <Route path="/feedback" exact>
+            <Feedback />
           </Route>
           <Route path="*">
             <NotFound />

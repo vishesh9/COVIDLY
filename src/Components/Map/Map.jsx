@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import india from "@svg-maps/india";
 import { SVGMap } from "react-svg-map";
-import Tooltip from "react-bootstrap/Tooltip";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import styled from "styled-components";
 
 import "react-svg-map/lib/index.css";
