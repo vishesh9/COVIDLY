@@ -44,7 +44,7 @@ const DashboardComponent = (props) => {
 
   return (
     <React.Fragment>
-      <main className="container fadeIn">
+      <main className="container fadeIn new">
         <div className="row">
           <div className="col-md-12" style={{ minHeight: "270px" }}>
             <CarouselComponent />
