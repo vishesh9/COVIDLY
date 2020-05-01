@@ -89,8 +89,8 @@ function CasesList(props) {
     setPage(0);
   };
 
-  const handleSearchChange = (event) => {
-    const searchString = event.target.textContent.toUpperCase();
+  const handleSearchChange = (event, value) => {
+    const searchString = (value === null) ? "" : value?.state.toUpperCase();
     let searchResults = TotalCases.filter((ele) => {
       return ele.state.toUpperCase().indexOf(searchString) !== -1;
     });
@@ -117,7 +117,7 @@ function CasesList(props) {
             getOptionLabel={(option) => option.state}
             style={{ float: "right", margin: "10px", width: 300 }}
             renderInput={(params) => <TextField {...params} label="Search" />}
-            onChange={handleSearchChange}
+            onChange={(event, value) => handleSearchChange(event, value)}
           />
           <TableContainer>
             <Table stickyHeader aria-label="sticky table">
@@ -195,8 +195,8 @@ function CasesList(props) {
           </p>
         </SkeletonTheme>
       ) : (
-        renderTable(TotalCases, IsLoading)
-      )}
+          renderTable(TotalCases, IsLoading)
+        )}
     </React.Fragment>
   );
 }
